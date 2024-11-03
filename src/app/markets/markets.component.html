@@ -1,0 +1,75 @@
+<div class="toolbar">
+	<div class="left">
+		<select class="clickable" name="limit" [(ngModel)]="pagination.limit" (ngModelChange)="filterMarkets()">
+			<option value="5">5</option>
+			<option value="10">10</option>
+			<option value="20">20</option>
+			<option value="50">50</option>
+			<option value="100">100</option>
+		</select>
+		<div>Kayıt Göster</div>
+	</div>
+	<div class="middle">
+		<select class="clickable" name="city" [(ngModel)]="filter.city" (ngModelChange)="filterMarkets()">
+			<option value="" disabled>İl...</option>
+			<option value="">Tümü</option>
+			<option *ngFor="let city of cities" [value]="city.value">{{ city.label }}</option>
+		</select>
+		<hr>
+		<select class="clickable" name="state" [(ngModel)]="filter.state" (ngModelChange)="filterMarkets()">
+			<option value="" disabled>İlçe...</option>
+			<option value="">Tümü</option>
+			<option *ngFor="let state of states" [value]="state.value">{{ state.label }}</option>
+		</select>
+		<hr>
+		<select class="clickable" name="province" [(ngModel)]="filter.province" (ngModelChange)="filterMarkets()">
+			<option value="" disabled>Mahalle...</option>
+			<option value="">Tümü</option>
+			<option *ngFor="let province of provinces" [value]="province.value">{{ province.label }}</option>
+		</select>
+	</div>
+	<div class="right">
+		<i class="fa-solid fa-magnifying-glass"></i>
+		<input name="search" type="text" [(ngModel)]="filter.search" placeholder="Ara..." (ngModelChange)="filterMarkets()">
+	</div>
+</div>
+
+<div class="table-responsive">
+	<div class="rows" *ngIf="filteredMarkets.length; else notFound">
+		<div class="market-row header">
+			<div class="name">Ad</div>
+			<div class="address">Adres</div>
+			<div class="city">İl</div>
+			<div class="state">İlçe</div>
+			<div class="province">Mahalle</div>
+			<div class="day">Gün</div>
+			<div class="point">Puan</div>
+		</div>
+		<div *ngFor="let market of filteredMarkets | paginate: { itemsPerPage: pagination.limit, currentPage: pagination.page, totalItems: pagination.total }" class="market-row">
+			<td class="name">{{ market.name }}</td>
+			<td class="address">{{ market.address }}</td>
+			<td class="city">{{ market.city || 'Ankara' }}</td>
+			<td class="state">{{ market.state }}</td>
+			<td class="province">{{ market.province }}</td>
+			<td class="day">{{ market.day }}</td>
+			<td class="point">
+				<i *ngFor="let star of [1, 2, 3, 4, 5]" class="uil uil-star" [ngClass]="{ 'active': star <= market.point! }"></i>
+			</td>
+		</div>
+	</div>
+	<div *ngIf="filteredMarkets.length" class="table-footer">
+		<div class="info">{{ pagination.total }} kayıttan {{ pagination.page * pagination.limit }} tanesi gösteriliyor.</div>
+		<pagination-controls
+			(pageChange)="paginate($event)"
+			previousLabel=""
+			nextLabel=""
+		></pagination-controls>
+	</div>
+
+	<ng-template #notFound>
+		<div class="not-found">
+			<img src="assets/illustrations/not-found-light.svg" alt="pazar yeri">
+			<span>Pazar yeri bulunamadı.</span>
+		</div>
+	</ng-template>
+</div>

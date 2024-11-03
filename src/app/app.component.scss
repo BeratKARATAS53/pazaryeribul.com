@@ -1,0 +1,50 @@
+$top-margin: 20px;
+$width: 60%;
+
+.content {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	background: var(--background);
+	color: var(--font-color);
+
+	.footer {
+		width: $width;
+		margin-bottom: $top-margin;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	
+	.header {
+		margin-top: $top-margin;
+		text-align: center;
+
+		.navs {
+			width: 250px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: $top-margin / 2;
+			font-weight: 600;
+
+			.theme {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				margin: 0 10px;
+				width: 150px;
+				border-radius: 10px;
+				font-weight: 600;
+				cursor: pointer;
+			}
+		}
+	}
+	
+	app-markets {
+		width: $width;
+	}
+}

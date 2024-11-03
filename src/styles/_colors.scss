@@ -1,0 +1,44 @@
+$primary: #F5F5F5;
+$secondary: #D9D9D9;
+$selection: #569DC8;
+
+$dark: #000;
+$light: #fff;
+
+$colors: (
+	"primary": var(--primary),
+	"secondary": var(--secondary),
+	"selection": $selection,
+);
+
+.btn-transparent {
+	background-color: transparent;
+	border: none;
+	outline: none;
+}
+
+@each $color, $code in $colors {
+	.btn-#{$color} {
+		background-color: $code;
+		color: $light;
+		border: none;
+		outline: none;
+
+		&:hover {
+			opacity: 0.7;
+			color: $light;
+		}
+	}
+
+	.text-#{$color} {
+		color: $code !important;
+	}
+
+	.badge-#{$color} {
+		background-color: $code;
+	}
+
+	.bg-#{$color} {
+		background-color: $code;
+	}
+}

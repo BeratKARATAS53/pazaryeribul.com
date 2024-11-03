@@ -1,0 +1,22 @@
+<div class="content" appTheme>
+	<div class="header">
+		<h2>pazaryeribul.com</h2>
+		<div class="navs">
+			<a class="clickable" routerLink="/about">Hakkında</a>
+			<select class="theme" name="theme" [(ngModel)]="activeTheme" (ngModelChange)="toggle()">
+				<option value="" disabled>Tema</option>
+				<option *ngFor="let theme of themes" [value]="theme.name">{{ theme.label }}</option>
+			</select>
+			<a class="clickable" routerLink="/about">Hakkında</a>
+		</div>
+	</div>
+	<app-markets></app-markets>
+	<div class="footer">
+		<span>
+			<a href="https://github.com/BeratKARATAS53/pazaryeribul.com" target="_blank">pazaryeribul.com</a>, tüm hakları saklıdır.
+		</span>
+		<span>
+			<a href="https://berat-karatas.com" target="_blank">D. Berat KARATAŞ</a> tarafından tasarlandı ve geliştirildi.
+		</span>
+	</div>
+</div>

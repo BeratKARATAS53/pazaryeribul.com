@@ -1,0 +1,151 @@
+.toolbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 0;
+
+	.left {
+		display: flex;
+		align-items: center;
+		border-radius: 20px;
+		padding: 10px;
+		background-color: #fff;
+
+		select {
+			background: var(--secondary);
+			margin-right: 10px;
+			border-radius: 20px;
+			padding: 0;
+			width: 30px;
+		}
+	}
+
+	.middle {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-grow: 1;
+		margin: 0 100px;
+		border-radius: 20px;
+		padding: 0 20px;
+		background-color: #fff;
+
+		select {
+			&:disabled {
+				color: #696969;
+			}
+
+			width: 100%;
+		}
+
+		hr {
+			width: 1px;
+			height: 20px;
+			background-color: var(--secondary);
+			margin: 0 10px;
+		}
+	}
+
+	.right {
+		width: 20%;
+	}
+}
+
+.table-responsive {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: calc(100vh - 300px);
+	background: var(--primary);
+	padding: 20px;
+	border-radius: 20px;
+
+	.rows {
+		overflow: auto;
+	}
+
+	.market-row {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 10px;
+		border-radius: 15px;
+
+		&.header {
+			background: var(--secondary);
+			font-weight: 600;
+		}
+
+		&:not(.header):nth-child(odd) {
+			background-color: var(--light-secondary);
+		}
+
+		.name {
+			width: 100px;
+			text-align: start;
+		}
+
+		.address {
+			width: 200px;
+			text-align: start;
+		}
+
+		.city {
+			width: 100px;
+			text-align: center;
+		}
+
+		.state {
+			width: 100px;
+			text-align: center;
+		}
+
+		.province {
+			width: 200px;
+			text-align: center;
+		}
+
+		.days {
+			width: 100px;
+			text-align: end;
+		}
+
+		.point {
+			width: 70px;
+			text-align: end;
+
+			.uil-star.active {
+				background-color: var(--selection);
+			}
+		}
+	}
+
+	.not-found {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+
+		img {
+			width: 400px;
+			margin: 20px;
+		}
+
+		span {
+			font-size: 20px;
+			font-weight: 500;
+		}
+	}
+
+	.table-footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 20px;
+
+		::ng-deep .ngx-pagination {
+			margin: 0;
+		}
+	}
+}
