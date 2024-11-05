@@ -4,12 +4,14 @@ export const nightTheme: Theme = {
 	name: 'night',
 	label: 'Gece',
 	properties: {
-		'--background': 'linear-gradient(to right, #8E9EAB, #EEF2F3)',
-		'--font-color': '#000',
-		'--primary': '#F5F5F5',
-		'--secondary': '#D9D9D9',
-		'--light-secondary': '#E9E9E9',
-		'--link': '#3232D3',
-		'--selection': '#569DC8',
+		'--background': 'linear-gradient(to right, #131F2C, #111D29)',
+		'--font-color': '#FFF',
+		'--primary': '#2A3B4E',
+		'--secondary': '#131F2C',
+		'--light-secondary': '#1C2D40',
+		'--link': '#5D93CE',
+		'--pagination-background': '#1F3044',
+		'--pagination-color': '#7DA6D3',
+		'--selection': '#5289CD',
 	}
 };

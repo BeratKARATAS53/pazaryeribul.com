@@ -21,19 +21,24 @@ export class AppService {
 
 		return this.http.post<Market[]>(`${this.monkedoURL}/automations/6727584dbcfa979526ef0bd8/run`, params, { headers });
 	}
-}
 
-export type Place = {
-	label: string;
-	value: string;
-};
+	getFilters(): Observable<Filters> {
+		return this.http.get<Filters>('https://app.monkedo.com/webhook/f0lhcaj8adgwgyzz');
+	}
+}
 
 export type Market = {
 	name: string;
 	address: string;
-	city?: string;
+	city: string;
 	state: string;
 	province: string;
 	day: string;
 	point?: number;
+}
+
+export type Filters = {
+	cities: string[];
+	states: string[];
+	provinces: string[];
 }

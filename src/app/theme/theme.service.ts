@@ -13,12 +13,16 @@ export class ThemeService {
 	) { }
 
 	getActiveTheme(): Theme {
-		const theme = this.themes.find(t => t.name === this.theme);
+		const themeName = localStorage.getItem('theme') || this.theme;
+
+		const theme = this.themes.find(t => t.name === themeName);
 		return theme!;
 	}
 
 	setTheme(name: string) {
 		this.theme = name;
+		localStorage.setItem('theme', name);
+
 		this.themeChange.emit(this.getActiveTheme());
 	}
 }

@@ -9,7 +9,7 @@
 		align-items: center;
 		border-radius: 20px;
 		padding: 10px;
-		background-color: #fff;
+		background-color: var(--primary);
 
 		select {
 			background: var(--secondary);
@@ -28,14 +28,14 @@
 		margin: 0 100px;
 		border-radius: 20px;
 		padding: 0 20px;
-		background-color: #fff;
+		background-color: var(--primary);
 
 		select {
-			&:disabled {
-				color: #696969;
-			}
-
 			width: 100%;
+
+			option:disabled {
+				color: var(--secondary);
+			}
 		}
 
 		hr {
@@ -146,6 +146,42 @@
 
 		::ng-deep .ngx-pagination {
 			margin: 0;
+
+			li {
+				background-color: var(--pagination-background);
+				border-radius: 5px;
+				border: 1px solid var(--selection);
+				margin-right: 5px;
+
+				&:last-child {
+					margin-right: 0;
+				}
+
+				&:hover, a:hover {
+					background-color: transparent;
+				}
+
+				&.pagination-previous, &.pagination-next {
+					width: 22px;
+
+					&.disabled {
+						background-color: var(--secondary);
+					}
+
+					&::after, &::before, a::after, a::before {
+						margin: 0;
+					}
+				}
+
+				&.current {
+					background-color: var(--selection);
+					color: #fff;
+				}
+
+				a {
+					color: var(--pagination-color);
+				}
+			}
 		}
 	}
 }

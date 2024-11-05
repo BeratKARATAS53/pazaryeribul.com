@@ -4,12 +4,14 @@ export const eveningTheme: Theme = {
 	name: 'evening',
 	label: 'Akşam',
 	properties: {
-		'--background': 'linear-gradient(to right, #8E9EAB, #EEF2F3)',
-		'--font-color': '#000',
-		'--primary': '#F5F5F5',
-		'--secondary': '#D9D9D9',
-		'--light-secondary': '#E9E9E9',
-		'--link': '#569DC8',
-		'--selection': '#569DC8',
+		'--background': 'linear-gradient(to right, #606C88, #3F4C6B)',
+		'--font-color': '#FFF',
+		'--primary': '#7481A1',
+		'--secondary': '#596888',
+		'--light-secondary': '#667696',
+		'--link': '#9CC7FF',
+		'--pagination-background': '#899AC2',
+		'--pagination-color': '#3D3D3D',
+		'--selection': '#3E618C',
 	}
 };

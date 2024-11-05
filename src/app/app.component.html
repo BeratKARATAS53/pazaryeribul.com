@@ -2,12 +2,12 @@
 	<div class="header">
 		<h2>pazaryeribul.com</h2>
 		<div class="navs">
-			<a class="clickable" routerLink="/about">Hakkında</a>
+			<a class="clickable" href="javascript:void(0)" (click)="openModal('infoModal')">Hakkında</a>
 			<select class="theme" name="theme" [(ngModel)]="activeTheme" (ngModelChange)="toggle()">
 				<option value="" disabled>Tema</option>
 				<option *ngFor="let theme of themes" [value]="theme.name">{{ theme.label }}</option>
 			</select>
-			<a class="clickable" routerLink="/about">Hakkında</a>
+			<a class="clickable" href="javascript:void(0)" (click)="openModal('changesModal')">Sürüm Notları</a>
 		</div>
 	</div>
 	<app-markets></app-markets>
@@ -20,3 +20,31 @@
 		</span>
 	</div>
 </div>
+
+<dialog id="infoModal" class="modal">
+	<div class="modal-content">
+		<div class="header">
+			<h2 class="title">Hakkında</h2>
+			<button class="close" (click)="closeModal('infoModal')">Kapat</button>
+		</div>
+		<p class="mb-3">Bu site, semt pazarlarını listelemek ve aranan yeri kolayca bulabilmek için geliştirilmiştir.</p>
+		<p class="mb-3">Bulunduğum ildeki pazarları vakit buldukça geziyorum. Bu pazarların ne zaman kurulduğunu bulmak için hep <a href="https://www.hal.gov.tr/Sayfalar/AnaSayfa.aspx" target="_blank">hal.gov.tr</a> adresine gidip bakıyordum. Hem o sitede istediğim günü bulmak hem de pazarın gerçekten olup olmadığını kontrol etmek için Google Haritalar'a bakmak uzun sürüyordu. Bu yüzden bir site geliştirmek istedim. Hazır geliştiriyorken biraz daha profesyonel yapıp herkesin faydalanmasını istedim.</p>
+		<p class="mb-3">Her pazar yeri için bazı bilgilere ek olarak adres (Google Haritalar'a yönlendirme mevcut) ve puan (Google Haritalar'daki puanlar) bilgilerini tutuyorum.</p>
+		<p>Semt pazarı bilgilerini <a href="https://www.hal.gov.tr/Sayfalar/AnaSayfa.aspx" target="_blank">hal.gov.tr</a> adresinden alıyorum.</p>
+	</div>
+</dialog>
+
+<dialog id="changesModal" class="modal">
+	<div class="modal-content">
+		<div class="header">
+			<h2 class="title">Sürüm Notları</h2>
+			<button class="close" (click)="closeModal('changesModal')">Kapat</button>
+		</div>
+		<div class="version-notes">
+			<span class="text-success">v1.00 (5 Kasım 2024):</span><br>
+			<ul>
+				<li>Haliyle ilk olarak site tasarlandı :D</li>
+			</ul>
+		</div>
+	</div>
+</dialog>

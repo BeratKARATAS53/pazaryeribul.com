@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
 
-import { AppService, Market, Place } from '../app.service';
-import { cityList, marketList } from '../constant';
+import { AppService, Market } from '../app.service';
+import { cityList, marketList, provinceList, stateList } from '../constant';
+import { ACTIVE_THEME, Theme } from '../theme/symbols';
+import { ThemeService } from '../theme/theme.service';
 
 @Component({
 	selector: 'app-markets',
@@ -11,14 +13,11 @@ import { cityList, marketList } from '../constant';
 	providers: [TitleCasePipe],
 })
 export class MarketsComponent {
-	title = 'pazaryeribul.com';
-	activeTheme: 'light' | 'dark' = 'light';
-
 	allMarkets: Market[] = marketList;
 	filteredMarkets: Market[] = marketList;
-	cities: Place[] = cityList;
-	states: Place[] = cityList;
-	provinces: Place[] = cityList;
+	cities: string[] = [];
+	states: string[] = [];
+	provinces: string[] = [];
 
 	filter = {
 		city: '',
@@ -32,13 +31,25 @@ export class MarketsComponent {
 		total: 0,
 	}
 
-	constructor(private appService: AppService) {}
+	Math = Math;
+
+	activeTheme: Theme['name'] = 'morning';
+
+	constructor(private appService: AppService, private themeService: ThemeService) {
+		this.activeTheme = this.themeService.getActiveTheme().name;
+	}
 	
 	ngOnInit(): void {
 		const params = {
 			...this.filter,
 			...this.pagination,
 		};
+
+		this.appService.getFilters().subscribe((filters) => {
+			this.cities = filters.cities;
+			this.states = filters.states;
+			this.provinces = filters.provinces;
+		});
 
 		//this.appService.getMarkets(params).subscribe((markets: Market[]) => {
 		//	this.markets = markets.map((market: Market) => ({
@@ -48,6 +59,10 @@ export class MarketsComponent {
 		//});
 		
 		this.filterMarkets();
+
+		this.themeService.themeChange.subscribe((theme: Theme) => {
+			this.activeTheme = theme.name;
+		});
 	}
 
 	async filterMarkets(): Promise<void> {
@@ -74,17 +89,16 @@ export class MarketsComponent {
 		}));
 		this.pagination.total = this.allMarkets.length;
 
-		this.filteredMarkets = [...this.allMarkets].slice((this.pagination.page - 1) * this.pagination.limit, this.pagination.page * this.pagination.limit);
-		this.filteredMarkets = this.filteredMarkets.filter((market: Market) => {
-			if (this.filter.city && market.city !== this.filter.city) {
+		this.filteredMarkets = [...this.allMarkets].filter((market: Market) => {
+			if (this.filter.city && market.city.toLowerCase() !== this.filter.city.toLowerCase()) {
 				return false;
 			}
 
-			if (this.filter.state && market.state !== this.filter.state) {
+			if (this.filter.state && market.state.toLowerCase() !== this.filter.state.toLowerCase()) {
 				return false;
 			}
 
-			if (this.filter.province && market.province !== this.filter.province) {
+			if (this.filter.province && market.province.toLowerCase() !== this.filter.province.toLowerCase()) {
 				return false;
 			}
 
@@ -93,11 +107,16 @@ export class MarketsComponent {
 			}
 
 			return true;
-		})
+		}).slice((this.pagination.page - 1) * this.pagination.limit, this.pagination.page * this.pagination.limit);
 	}
 
 	paginate(page: number): void {
 		this.pagination.page = page;
+		this.filterMarkets();
+	}
+
+	search(): void {
+		this.pagination.page = 1;
 		this.filterMarkets();
 	}
 

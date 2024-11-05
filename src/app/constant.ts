@@ -2,6 +2,7 @@ export const marketList = [
 	{
 		name: "KAYAŞ AÇIK SEMT PAZARI",
 		province: "KAYAŞ",
+		city: "ANKARA",
 		state: "MAMAK",
 		address: "KAYAŞ MAHALLESİ YOZGAT CADDESİ ÜZERİ",
 		day: "Pazar"
@@ -9,6 +10,7 @@ export const marketList = [
 	{
 		name: "MAMAK KAPALI SEMT PAZARI",
 		province: "MİSKET",
+		city: "ANKARA",
 		state: "MAMAK",
 		address: "MİSKET MAHALLESİ 604 SOKAK NO : 2",
 		day: "Pazar"
@@ -16,6 +18,7 @@ export const marketList = [
 	{
 		name: "BATIKENT KAPALI PAZARI",
 		province: "BATIKENT",
+		city: "ANKARA",
 		state: "YENİMAHALLE",
 		address: "BATIKENT BAŞKENT BULVARI 1994. SOK. İLE 1995 SOKAK ARASI",
 		day: "Pazar"
@@ -23,6 +26,7 @@ export const marketList = [
 	{
 		name: "YENİMAHALLE PAZAR PAZARI",
 		province: "MERKEZ",
+		city: "ANKARA",
 		state: "YENİMAHALLE",
 		address: "YENİMAHALLE İVEDİK CADDESİ ASIM BEY SOK. İLE AŞIK ÇELEBİ SOK.",
 		day: "Pazar"
@@ -30,6 +34,7 @@ export const marketList = [
 	{
 		name: "AYYILDIZ PAZARI",
 		province: "PURSAKLAR",
+		city: "ANKARA",
 		state: "PURSAKLAR",
 		address: "Ayyıldız Mahallesi Yunus Emre Sokak",
 		day: "Pazar"
@@ -37,6 +42,7 @@ export const marketList = [
 	{
 		name: "PAZAR TÖREKENT MAHALLESİ SEMT PAZARI",
 		province: "SİNCAN",
+		city: "ANKARA",
 		state: "SİNCAN",
 		address: "Törekent Mahallesi 2105/1 Parsel Muhtarlık Binası yanı",
 		day: "Pazar"
@@ -44,6 +50,7 @@ export const marketList = [
 	{
 		name: "100. Yıl Pazarı",
 		province: "YÜZÜNCÜYILİŞÇİBLOKLARI",
+		city: "ANKARA",
 		state: "ÇANKAYA",
 		address: "100. Yıl İşçi Blokları 1427. Cad. ile 1516. Cad. Köşesi",
 		day: "Pazar"
@@ -51,6 +58,7 @@ export const marketList = [
 	{
 		name: "Küçükesat Pazarı",
 		province: "ESAT",
+		city: "ANKARA",
 		state: "ÇANKAYA",
 		address: "Bağlar Cad. ile Belligün Sokak Köşesi",
 		day: "Pazar"
@@ -58,6 +66,7 @@ export const marketList = [
 	{
 		name: "Hacıkara Semt Pazarı",
 		province: "BEYPAZARI",
+		city: "ANKARA",
 		state: "BEYPAZARI",
 		address: "Hacıkara Mahallesi Şehit Ümit Bölükoğlu Cd.-Beypazarı",
 		day: "Pazar"
@@ -65,6 +74,7 @@ export const marketList = [
 	{
 		name: "KUŞCAĞIZ",
 		province: "UFUKTEPE",
+		city: "ANKARA",
 		state: "KEÇİÖREN",
 		address: "KUŞCAĞIZ MAHALLESİ TAŞOCAĞI SOKAK",
 		day: "Pazar"
@@ -72,6 +82,7 @@ export const marketList = [
 	{
 		name: "23 NİSAN",
 		province: "AKTEPE",
+		city: "ANKARA",
 		state: "KEÇİÖREN",
 		address: "23 NİSAN MAHALLESİ ANAVATAN CADDESİ",
 		day: "Pazar"
@@ -79,6 +90,7 @@ export const marketList = [
 	{
 		name: "HASKÖY",
 		province: "KALABA",
+		city: "ANKARA",
 		state: "KEÇİÖREN",
 		address: "SUBAY EVLERİ MAHALLESİ PAŞABAHÇE SOKAK",
 		day: "Pazar"
@@ -86,6 +98,7 @@ export const marketList = [
 	{
 		name: "KARDEŞLER",
 		province: "ŞEHİTKUBİLAY",
+		city: "ANKARA",
 		state: "KEÇİÖREN",
 		address: "AYVALI MAHALLESİ 158 SOKAK",
 		day: "Pazar"
@@ -93,6 +106,7 @@ export const marketList = [
 	{
 		name: "FOÇA",
 		province: "MERKEZ",
+		city: "ANKARA",
 		state: "KEÇİÖREN",
 		address: "SANATORYUM CADDESİ FOÇA SOKAK",
 		day: "Pazar"
@@ -100,6 +114,7 @@ export const marketList = [
 	{
 		name: "OVACIK",
 		province: "BAĞLUM",
+		city: "ANKARA",
 		state: "KEÇİÖREN",
 		address: "OVACIK MAHALLESİ KENDİN YAP SİTESİ ÖNÜ",
 		day: "Pazar"
@@ -107,6 +122,7 @@ export const marketList = [
 	{
 		name: "ÖRNEK",
 		province: "YILDIRIMBEYAZIT/DIŞKAPI",
+		city: "ANKARA",
 		state: "ALTINDAĞ",
 		address: "Hızır Reis Caddesi Pamuk Sokak Üzeri",
 		day: "Pazar"
@@ -114,6 +130,7 @@ export const marketList = [
 	{
 		name: "GÜLPINAR",
 		province: "HASKÖY",
+		city: "ANKARA",
 		state: "ALTINDAĞ",
 		address: "Yıldıztepe Mah. 166. Cad.No:23",
 		day: "Pazar"
@@ -121,6 +138,7 @@ export const marketList = [
 	{
 		name: "BEŞİKKAYA",
 		province: "SİTELER",
+		city: "ANKARA",
 		state: "ALTINDAĞ",
 		address: "Beşikkaya Mahallesi 459-458-461. Sokaklar arası",
 		day: "Pazar"
@@ -128,6 +146,7 @@ export const marketList = [
 	{
 		name: "Zirvekent",
 		province: "MAMAK",
+		city: "ANKARA",
 		state: "MAMAK",
 		address: "Kusunlar Mah. TOKİ Blokları içi",
 		day: "Pazar"
@@ -135,6 +154,7 @@ export const marketList = [
 	{
 		name: "PAZAR PINARBAŞI MAHALLESİ SEMT PAZARI",
 		province: "SİNCAN",
+		city: "ANKARA",
 		state: "SİNCAN",
 		address: "Pınarbaşı Mahallesi Yaşar Kemal Sokak ile Palamut Sokak Kesişimi",
 		day: "Pazar"
@@ -142,6 +162,7 @@ export const marketList = [
 	{
 		name: "Toki Semt Pazarı",
 		province: "MERKEZ",
+		city: "ANKARA",
 		state: "GÖLBAŞI",
 		address: "Eymir Mahallesi Park Eymir Toki Konutları Gölbaşı / ANKARA",
 		day: "Pazar"
@@ -149,6 +170,7 @@ export const marketList = [
 	{
 		name: "Kızılcaşar Açık Semt Pazarı",
 		province: "GÖLBAŞI",
+		city: "ANKARA",
 		state: "GÖLBAŞI",
 		address: "Kızılcaşar Mahallesi Turgut Özal Bulvarı üzeri Kızılcaşar muhtarlığı Karşısı Gölbaşı / ANKARA",
 		day: "Pazar"
@@ -156,6 +178,7 @@ export const marketList = [
 	{
 		name: "AŞIKPAŞA PAZARI",
 		province: "ESAT",
+		city: "ANKARA",
 		state: "ÇANKAYA",
 		address: "ŞEMSETTİN GÜNALTAY CADDESİ İLE 244.CADDE KÖŞESİ",
 		day: "Pazar"
@@ -163,100 +186,134 @@ export const marketList = [
 ];
 
 export const cityList = [
-	{
-		label: "Adana",
-		value: "Adana"
-	},
-	{
-		label: "Adıyaman",
-		value: "Adıyaman"
-	},
-	{
-		label: "Afyonkarahisar",
-		value: "Afyonkarahisar"
-	},
-	{
-		label: "Ağrı",
-		value: "Ağrı"
-	},
-	{
-		label: "Amasya",
-		value: "Amasya"
-	},
-	{
-		label: "Ankara",
-		value: "Ankara"
-	},
-	{
-		label: "Antalya",
-		value: "Antalya"
-	},
-	{
-		label: "Artvin",
-		value: "Artvin"
-	},
-	{
-		label: "Aydın",
-		value: "Aydın"
-	},
-	{
-		label: "Balıkesir",
-		value: "Balıkesir"
-	},
-	{
-		label: "Bilecik",
-		value: "Bilecik"
-	},
-	{
-		label: "Bingöl",
-		value: "Bingöl"
-	},
-	{
-		label: "Bitlis",
-		value: "Bitlis"
-	},
-	{
-		label: "Bolu",
-		value: "Bolu"
-	},
-	{
-		label: "Burdur",
-		value: "Burdur"
-	},
-	{
-		label: "Bursa",
-		value: "Bursa"
-	},
-	{
-		label: "Çanakkale",
-		value: "Çanakkale"
-	},
-	{
-		label: "Çankırı",
-		value: "Çankırı"
-	},
-	{
-		label: "Çorum",
-		value: "Çorum"
-	},
-	{
-		label: "Denizli",
-		value: "Denizli"
-	},
-	{
-		label: "Diyarbakır",
-		value: "Diyarbakır"
-	},
-	{
-		label: "Edirne",
-		value: "Edirne"
-	},
-	{
-		label: "Elazığ",
-		value: "Elazığ"
-	},
-	{
-		label: "Erzincan",
-		value: "Erzincan"
-	},
+	"ADANA",
+	"ADIYAMAN",
+	"AFYONKARAHİSAR",
+	"AĞRI",
+	"AMASYA",
+	"ANKARA",
+	"ANTALYA",
+	"ARTVİN",
+	"AYDIN",
+	"BALIKESİR",
+	"BİLECİK",
+	"BİNGÖL",
+	"BİTLİS",
+	"BOLU",
+	"BURDUR",
+	"BURSA",
+	"ÇANAKKALE",
+	"ÇANKIRI",
+	"ÇORUM",
+	"DENİZLİ",
+	"DİYARBAKIR",
+	"EDİRNE",
+	"ELAZIĞ",
+	"ERZİNCAN",
+	"ERZURUM",
+	"ESKİŞEHİR",
+	"GAZİANTEP",
+	"GİRESUN",
+	"GÜMÜŞHANE",
+	"HAKKARİ",
+	"HATAY",
+	"IĞDIR",
+	"ISPARTA",
+	"İSTANBUL",
+	"İZMİR",
+	"KAHRAMANMARAŞ",
+	"KARABÜK",
+	"KARAMAN",
+	"KARS",
+	"KASTAMONU",
+	"KAYSERİ",
+	"KIRIKKALE",
+	"KIRKLARELİ",
+	"KIRŞEHİR",
+	"KOCAELİ",
+	"KONYA",
+	"KÜTAHYA",
+	"MALATYA",
+	"MANİSA",
+	"KAHRAMANKAZAN",
+	"KEÇİÖREN",
+	"MAMAK",
+	"NALLIHAN",
+	"PURSAKLAR",
+	"SİNCAN",
+	"YENİMAHALLE",
+	"ÇANKAYA",
+	"ÇUBUK"
+];
+
+export const stateList = [
+	"ALTINDAĞ",
+	"BEYPAZARI",
+	"GÖLBAŞI",
+	"KAHRAMANKAZAN",
+	"KEÇİÖREN",
+	"MAMAK",
+	"NALLIHAN",
+	"PURSAKLAR",
+	"SİNCAN",
+	"YENİMAHALLE",
+	"ÇANKAYA",
+	"ÇUBUK"
+];
+
+export const provinceList = [
+	"ABİDİNPAŞA",
+	"AKDERE",
+	"AKTEPE",
+	"ALTINDAĞ",
+	"AYDINLIKEVLER",
+	"AYRANCI",
+	"BAHÇELİEVLER",
+	"BALGAT",
+	"BATIKENT",
+	"BAĞLUM",
+	"BEYPAZARI",
+	"BİLKENT",
+	"BOĞAZİÇİ",
+	"CEBECİ",
+	"DEMETEVLER",
+	"DEMİRLİBAHÇE",
+	"DİKMEN",
+	"ESAT",
+	"ESERTEPE(YAYLA)",
+	"ETLİK(İNCİRLİ)",
+	"GÖLBAŞI",
+	"GÜLVEREN",
+	"HASKÖY",
+	"HÜSEYİNGAZİ",
+	"İSKİTLER",
+	"KALABA",
+	"KARŞIYAKA",
+	"KAYAŞ",
+	"KIRKONAKLAR",
+	"MALTEPE",
+	"MAMAK",
+	"MERKEZ",
+	"MERKEZ KÖYLER",
+	"MİSKET",
+	"NALLIHAN",
+	"OSTİM",
+	"PURSAKLAR",
+	"SARAYKÖY",
+	"SARIYAR",
+	"SIHHIYE",
+	"SİNCAN",
+	"SİTELER",
+	"SUSUZ",
+	"UFUKTEPE",
+	"YAKACIK/YURTÇU",
+	"YENİKENT",
+	"YENİMAHALLE",
+	"YILDIRIMBEYAZIT/DIŞKAPI",
+	"YILDIZ",
+	"YÜZÜNCÜYILİŞÇİBLOKLARI",
+	"ÇAYIRHAN",
+	"ÖVEÇLER",
+	"ŞEHİTKUBİLAY",
+	"ŞENTEPE"
 ];

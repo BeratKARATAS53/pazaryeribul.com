@@ -9,7 +9,9 @@ export const morningTheme: Theme = {
 		'--primary': '#F5F5F5',
 		'--secondary': '#D9D9D9',
 		'--light-secondary': '#E9E9E9',
-		'--link': '#3232D3',
+		'--link': '#191970',
+		'--pagination-background': '#FFF',
+		'--pagination-color': '#212B36',
 		'--selection': '#569DC8',
 	}
 };

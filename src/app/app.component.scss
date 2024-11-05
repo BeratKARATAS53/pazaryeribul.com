@@ -1,6 +1,44 @@
 $top-margin: 20px;
 $width: 60%;
 
+dialog {
+	width: 450px;
+	margin: 55px auto;
+	border: none;	
+	border-radius: 20px;
+	padding: 20px;
+	text-align: justify;
+
+	&::backdrop {
+		background-color: rgba(0, 0, 0, 0.3);
+	}
+
+	.header {
+		margin-bottom: 10px;
+
+		.title {
+			flex-grow: 1;
+			text-align: center;
+		}
+
+		.close {
+			position: absolute;
+			top: 20px;
+			right: 20px;
+			border: none;
+			border-radius: 5px;
+			background: transparent;
+			font-weight: 600;
+			cursor: pointer;
+			padding: 5px 10px;
+		}
+	}
+
+	.mb-3 {
+		margin-bottom: 10px;
+	}
+}
+
 .content {
 	width: 100%;
 	height: 100vh;
@@ -28,23 +66,61 @@ $width: 60%;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			margin-top: $top-margin / 2;
+			margin-top: calc($top-margin / 2);
 			font-weight: 600;
+			color: var(--link);
 
 			.theme {
 				display: flex;
 				justify-content: center;
 				align-items: center;
 				margin: 0 10px;
-				width: 150px;
+				width: 80px;
 				border-radius: 10px;
 				font-weight: 600;
 				cursor: pointer;
+			}
+
+			select {
+				color: var(--link);
 			}
 		}
 	}
 	
 	app-markets {
 		width: $width;
+	}
+}
+
+.evening {
+	background: #7481A1;
+	color: #FFF;
+
+	a, .close {
+		color: #9CC7FF;
+	}
+}
+
+.morning {
+	background: #F5F5F5;
+	color: #000;
+
+	a, .close {
+		color: #191970;
+	}
+}
+
+.night {
+	background: #2A3B4E;
+	color: #FFF;
+
+	a, .close {
+		color: #5D93CE;
+	}
+}
+
+.version-notes {
+	ul {
+		padding-left: 20px;
 	}
 }
