@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
 
 import { AppService, Market } from '../app.service';
-import { cityList, marketList, provinceList, stateList } from '../constant';
-import { ACTIVE_THEME, Theme } from '../theme/symbols';
+import { Theme } from '../theme/symbols';
 import { ThemeService } from '../theme/theme.service';
 
 @Component({
@@ -13,16 +12,22 @@ import { ThemeService } from '../theme/theme.service';
 	providers: [TitleCasePipe],
 })
 export class MarketsComponent {
-	allMarkets: Market[] = marketList;
-	filteredMarkets: Market[] = marketList;
+	allMarkets: Market[] = [];
+	filteredMarkets: Market[] = [];
+
 	cities: string[] = [];
 	states: string[] = [];
-	provinces: string[] = [];
+	districts: string[] = [];
+	days: string[] = [];
+
+	cityStatesMap: { city: string, states: string[] }[] = [];
+	stateDistrictMap: { city: string, state: string, districts: string[] }[] = [];
 
 	filter = {
 		city: '',
 		state: '',
-		province: '',
+		district: '',
+		day: '',
 		search: '',
 	};
 	pagination = {
@@ -31,6 +36,8 @@ export class MarketsComponent {
 		total: 0,
 	}
 
+	pageReady = false;
+
 	Math = Math;
 
 	activeTheme: Theme['name'] = 'morning';
@@ -38,27 +45,24 @@ export class MarketsComponent {
 	constructor(private appService: AppService, private themeService: ThemeService) {
 		this.activeTheme = this.themeService.getActiveTheme().name;
 	}
-	
+
 	ngOnInit(): void {
-		const params = {
-			...this.filter,
-			...this.pagination,
-		};
+		//const filters = JSON.parse(localStorage.getItem('filters') || '{}');
+		//if (Object.keys(filters).length) this.filter = filters;
 
-		this.appService.getFilters().subscribe((filters) => {
-			this.cities = filters.cities;
-			this.states = filters.states;
-			this.provinces = filters.provinces;
+		//const pagination = JSON.parse(localStorage.getItem('pagination') || '{}');
+		//if (Object.keys(pagination).length) this.pagination = pagination;
+
+		this.appService.getMarkets().subscribe((markets) => {
+			this.groupLocations(markets);
+
+			this.allMarkets = markets;
+			this.pagination.total = this.allMarkets.length;
+
+			this.filterMarkets();
+
+			this.pageReady = true;
 		});
-
-		//this.appService.getMarkets(params).subscribe((markets: Market[]) => {
-		//	this.markets = markets.map((market: Market) => ({
-		//		...market,
-		//		name: new TitleCasePipe().transform(market.name.toLowerCase()),
-		//	}));
-		//});
-		
-		this.filterMarkets();
 
 		this.themeService.themeChange.subscribe((theme: Theme) => {
 			this.activeTheme = theme.name;
@@ -66,48 +70,64 @@ export class MarketsComponent {
 	}
 
 	async filterMarkets(): Promise<void> {
-		//const params = {
-		//	...this.filter,
-		//	...this.pagination,
-		//};
-
-		//this.appService.getMarkets(params).subscribe((markets: Market[]) => {
-		//	this.markets = markets.map((market: Market) => ({
-		//		...market,
-		//		name: new TitleCasePipe().transform(market.name.toLowerCase()),
-		//	}));
-		//});
-
-		this.allMarkets = [...marketList].map((market: Market) => ({
-			name: this.toTitleCase(market.name),
-			address: this.toTitleCase(market.address),
-			city: market.city ? this.toTitleCase(market.city) : '',
-			state: this.toTitleCase(market.state),
-			province: this.toTitleCase(market.province),
-			day: this.toTitleCase(market.day),
-			point: market.point ?? 0,
-		}));
-		this.pagination.total = this.allMarkets.length;
+		//localStorage.setItem('filters', JSON.stringify(this.filter));
+		//localStorage.setItem('pagination', JSON.stringify(this.pagination));
 
 		this.filteredMarkets = [...this.allMarkets].filter((market: Market) => {
-			if (this.filter.city && market.city.toLowerCase() !== this.filter.city.toLowerCase()) {
-				return false;
-			}
-
-			if (this.filter.state && market.state.toLowerCase() !== this.filter.state.toLowerCase()) {
-				return false;
-			}
-
-			if (this.filter.province && market.province.toLowerCase() !== this.filter.province.toLowerCase()) {
-				return false;
-			}
-
-			if (this.filter.search && !market.name.toLowerCase().includes(this.filter.search.toLowerCase())) {
+			if (
+				this.filter.city && market.city.toLocaleLowerCase('tr') !== this.filter.city.toLocaleLowerCase('tr')
+				|| this.filter.state && market.state.toLocaleLowerCase('tr') !== this.filter.state.toLocaleLowerCase('tr')
+				|| this.filter.district && market.district.toLocaleLowerCase('tr') !== this.filter.district.toLocaleLowerCase('tr')
+				|| this.filter.search && (
+					!market.name.toLocaleLowerCase('tr').includes(this.filter.search.toLocaleLowerCase('tr'))
+					&& !market.address.toLocaleLowerCase('tr').includes(this.filter.search.toLocaleLowerCase('tr'))
+					&& !market.city.toLocaleLowerCase('tr').includes(this.filter.search.toLocaleLowerCase('tr'))
+					&& !market.state.toLocaleLowerCase('tr').includes(this.filter.search.toLocaleLowerCase('tr'))
+					&& !market.district.toLocaleLowerCase('tr').includes(this.filter.search.toLocaleLowerCase('tr'))
+				)
+				|| this.filter.day && market.day.toLocaleLowerCase('tr') !== this.filter.day.toLocaleLowerCase('tr')
+			) {
 				return false;
 			}
 
 			return true;
-		}).slice((this.pagination.page - 1) * this.pagination.limit, this.pagination.page * this.pagination.limit);
+		});
+
+		this.pagination.total = this.filteredMarkets.length;
+
+		const { page, limit } = this.pagination;
+		this.filteredMarkets = this.filteredMarkets.sort((a, b) => {
+			if (a.city !== b.city) return a.city > b.city ? 1 : -1;
+			if (a.state !== b.state) return a.state > b.state ? 1 : -1;
+			return a.district > b.district ? 1 : -1;
+		}).slice((page - 1) * limit, page * limit);
+	}
+
+	updateLocationFilters(type: 'city' | 'state' | 'district', location: any): void {
+		if (type === 'city') {
+			this.states = this.cityStatesMap.find((cs) => cs.city === location)!.states || [];
+		}
+
+		if (['city', 'state'].includes(type)) {
+			this.districts = this.stateDistrictMap.filter((cs) => cs.state === location)!.map((cs) => cs.districts).flat() || [];
+		}
+
+		this.search();
+	}
+
+	clearFilters(type: 'city' | 'state' | 'district'): void {
+		if (type === 'city') {
+			this.cities = [...new Set(this.allMarkets.map((market) => market.city))].sort();
+		}
+
+		if (['city', 'state'].includes(type)) {
+			this.states = [...new Set(this.allMarkets.map((market) => market.state))].sort();
+		}
+
+		this.districts = [...new Set(this.allMarkets.map((market) => market.district))].sort();
+
+		this.filter[type] = '';
+		this.search();
 	}
 
 	paginate(page: number): void {
@@ -120,7 +140,26 @@ export class MarketsComponent {
 		this.filterMarkets();
 	}
 
-	private toTitleCase(value: string): string {
-		return new TitleCasePipe().transform(value.toLowerCase());
+	private groupLocations(markets: Market[]): void {
+		this.cities = [...new Set(markets.map((market) => market.city))].sort();
+		this.states = [...new Set(markets.map((market) => market.state))].sort();
+		this.districts = [...new Set(markets.map((market) => market.district))].sort();
+		this.days = [...new Set(markets.map((market) => market.day))].sort();
+
+		this.cityStatesMap = this.cities.map((city) => ({
+			city,
+			states: [...new Set(markets.filter((market) => market.city === city).map((market) => market.state))].sort(),
+		}));
+
+		const stateDistrictMap = this.cities.map((city) => {
+			const cityMarkets = markets.filter((market) => market.city === city);
+
+			return this.states.map((state) => ({
+				city,
+				state,
+				districts: [...new Set(cityMarkets.filter((market) => market.state === state).map((market) => market.district))].sort(),
+			}));
+		});
+		this.stateDistrictMap = stateDistrictMap.flat();
 	}
 }

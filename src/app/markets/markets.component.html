@@ -1,76 +1,98 @@
-<div class="toolbar">
-	<div class="left">
-		<select class="clickable" name="limit" [(ngModel)]="pagination.limit" (ngModelChange)="search()">
-			<option value="5">5</option>
-			<option value="10">10</option>
-			<option value="20">20</option>
-			<option value="50">50</option>
-			<option value="100">100</option>
-		</select>
-		<div>Kayıt Göster</div>
+<div *ngIf="pageReady; else loading;">
+	<div class="toolbar">
+		<div class="left">
+			<select class="clickable" name="limit" [(ngModel)]="pagination.limit" (ngModelChange)="search()">
+				<option value="5">5</option>
+				<option value="10">10</option>
+				<option value="20">20</option>
+				<option value="50">50</option>
+				<option value="100">100</option>
+			</select>
+			<div>Kayıt Göster</div>
+		</div>
+		<div class="middle">
+			<ng-container>
+				<select class="clickable" name="city" [(ngModel)]="filter.city" (ngModelChange)="updateLocationFilters('city', $event)">
+					<option value="" disabled>İl...</option>
+					<option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+				</select>
+				<i *ngIf="filter.city" class="uil uil-times clickable" (click)="clearFilters('city')"></i>
+			</ng-container>
+			<hr>
+			<ng-container>
+				<select class="clickable" name="state" [(ngModel)]="filter.state" (ngModelChange)="updateLocationFilters('state', $event)">
+					<option value="" disabled>İlçe...</option>
+					<option *ngFor="let state of states" [value]="state">{{ state }}</option>
+				</select>
+				<i *ngIf="filter.state" class="uil uil-times clickable" (click)="clearFilters('state')"></i>
+			</ng-container>
+			<hr>
+			<ng-container>
+				<select class="clickable" name="district" [(ngModel)]="filter.district" (ngModelChange)="updateLocationFilters('district', $event)">
+					<option value="" disabled>Mahalle...</option>
+					<option *ngFor="let district of districts" [value]="district">{{ district }}</option>
+				</select>
+				<i *ngIf="filter.district" class="uil uil-times clickable" (click)="clearFilters('district')"></i>
+			</ng-container>
+			<hr>
+			<ng-container>
+				<select class="clickable" name="day" [(ngModel)]="filter.day" (ngModelChange)="search()">
+					<option value="" disabled>Gün...</option>
+					<option *ngFor="let day of days" [value]="day">{{ day }}</option>
+				</select>
+				<i *ngIf="filter.day" class="uil uil-times clickable" (click)="filter.day = ''; search()"></i>
+			</ng-container>
+		</div>
+		<div class="right">
+			<i class="fa-solid fa-magnifying-glass"></i>
+			<input name="search" type="text" [(ngModel)]="filter.search" placeholder="Ara..." (ngModelChange)="search()">
+		</div>
 	</div>
-	<div class="middle">
-		<select class="clickable" name="city" [(ngModel)]="filter.city" (ngModelChange)="search()">
-			<option value="" disabled>İl...</option>
-			<option value="">Tümü</option>
-			<option *ngFor="let city of cities" [value]="city">{{ city }}</option>
-		</select>
-		<hr>
-		<select class="clickable" name="state" [(ngModel)]="filter.state" (ngModelChange)="search()">
-			<option value="" disabled>İlçe...</option>
-			<option value="">Tümü</option>
-			<option *ngFor="let state of states" [value]="state">{{ state }}</option>
-		</select>
-		<hr>
-		<select class="clickable" name="province" [(ngModel)]="filter.province" (ngModelChange)="search()">
-			<option value="" disabled>Mahalle...</option>
-			<option value="">Tümü</option>
-			<option *ngFor="let province of provinces" [value]="province">{{ province }}</option>
-		</select>
-	</div>
-	<div class="right">
-		<i class="fa-solid fa-magnifying-glass"></i>
-		<input name="search" type="text" [(ngModel)]="filter.search" placeholder="Ara..." (ngModelChange)="search()">
-	</div>
+	
+	<div class="table-responsive">
+		<div class="rows" *ngIf="filteredMarkets.length; else notFound">
+			<div class="market-row header">
+				<div class="name">Ad</div>
+				<div class="address">Adres</div>
+				<div class="city">İl</div>
+				<div class="state">İlçe</div>
+				<div class="district">Mahalle</div>
+				<div class="day">Gün</div>
+				<!--<div class="point">Puan</div>-->
+			</div>
+			<div *ngFor="let market of filteredMarkets | paginate: { itemsPerPage: pagination.limit, currentPage: pagination.page, totalItems: pagination.total }" class="market-row">
+				<td class="name">{{ market.name }}</td>
+				<td class="address">{{ market.address }}</td>
+				<td class="city">{{ market.city }}</td>
+				<td class="state">{{ market.state }}</td>
+				<td class="district">{{ market.district }}</td>
+				<td class="day">{{ market.day }}</td>
+				<!--<td class="point">
+					<i *ngFor="let star of [1, 2, 3, 4, 5]" class="uil uil-star" [ngClass]="{ 'active': star <= market.point! }"></i>
+				</td>-->
+			</div>
+		</div>
+		<div *ngIf="filteredMarkets.length" class="table-footer">
+			<div class="info">{{ Math.min((pagination.page - 1) * pagination.limit + 1, pagination.total) }} - {{ Math.min(pagination.page * pagination.limit + 1, pagination.total) }} arası kayıtlar gösteriliyor.</div>
+			<pagination-controls
+				[maxSize]="7"
+				(pageChange)="paginate($event)"
+				previousLabel=""
+				nextLabel=""
+			></pagination-controls>
+		</div>
+	
+		<ng-template #notFound>
+			<div class="not-found">
+				<img [src]="'assets/illustrations/not-found-' + activeTheme + '.svg'" alt="pazar yeri">
+				<span>Pazar yeri bulunamadı.</span>
+			</div>
+		</ng-template>
+	</div>	
 </div>
 
-<div class="table-responsive">
-	<div class="rows" *ngIf="filteredMarkets.length; else notFound">
-		<div class="market-row header">
-			<div class="name">Ad</div>
-			<div class="address">Adres</div>
-			<div class="city">İl</div>
-			<div class="state">İlçe</div>
-			<div class="province">Mahalle</div>
-			<div class="day">Gün</div>
-			<div class="point">Puan</div>
-		</div>
-		<div *ngFor="let market of filteredMarkets | paginate: { itemsPerPage: pagination.limit, currentPage: pagination.page, totalItems: pagination.total }" class="market-row">
-			<td class="name">{{ market.name }}</td>
-			<td class="address">{{ market.address }}</td>
-			<td class="city">{{ market.city }}</td>
-			<td class="state">{{ market.state }}</td>
-			<td class="province">{{ market.province }}</td>
-			<td class="day">{{ market.day }}</td>
-			<td class="point">
-				<i *ngFor="let star of [1, 2, 3, 4, 5]" class="uil uil-star" [ngClass]="{ 'active': star <= market.point! }"></i>
-			</td>
-		</div>
+<ng-template #loading>
+	<div class="loading">
+		<i class="uil uil-spinner"></i>
 	</div>
-	<div *ngIf="filteredMarkets.length" class="table-footer">
-		<div class="info">{{ Math.min((pagination.page - 1) * pagination.limit + 1, pagination.total) }} - {{ Math.min(pagination.page * pagination.limit + 1, pagination.total) }} arası kayıtlar gösteriliyor.</div>
-		<pagination-controls
-			[maxSize]="5"
-			(pageChange)="paginate($event)"
-			previousLabel=""
-			nextLabel=""
-		></pagination-controls>
-	</div>
-
-	<ng-template #notFound>
-		<div class="not-found">
-			<img [src]="'assets/illustrations/not-found-' + activeTheme + '.svg'" alt="pazar yeri">
-			<span>Pazar yeri bulunamadı.</span>
-		</div>
-	</ng-template>
-</div>
+</ng-template>

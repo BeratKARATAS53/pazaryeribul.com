@@ -1,5 +1,5 @@
 $top-margin: 20px;
-$width: 60%;
+$width: 80%;
 
 dialog {
 	width: 450px;
@@ -118,9 +118,15 @@ dialog {
 		color: #5D93CE;
 	}
 }
+s
+.notes {
+	text-align: start;
 
-.version-notes {
 	ul {
 		padding-left: 20px;
+	}
+
+	hr {
+		margin: 20px 10px;
 	}
 }

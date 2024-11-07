@@ -7,7 +7,7 @@
 				<option value="" disabled>Tema</option>
 				<option *ngFor="let theme of themes" [value]="theme.name">{{ theme.label }}</option>
 			</select>
-			<a class="clickable" href="javascript:void(0)" (click)="openModal('changesModal')">Sürüm Notları</a>
+			<a class="clickable" href="javascript:void(0)" (click)="openModal('changesModal')">Gelişmeler</a>
 		</div>
 	</div>
 	<app-markets></app-markets>
@@ -37,10 +37,19 @@
 <dialog id="changesModal" class="modal">
 	<div class="modal-content">
 		<div class="header">
-			<h2 class="title">Sürüm Notları</h2>
+			<h2 class="title">Gelişmeler</h2>
 			<button class="close" (click)="closeModal('changesModal')">Kapat</button>
 		</div>
-		<div class="version-notes">
+		<div class="notes">
+			<h4>Yol Haritası</h4>
+			<ul>
+				<li>Şikayet, İstek, Öneri formu eklenmesi.</li>
+				<li>Filtrelerin kaydedilip sayfa her açıldığında otomatik seçili gelmesi.</li>
+				<li>Yeni bir pazar yeri eklemek için form oluşturulması.</li>
+			</ul>
+
+			<hr>
+			<h4>Sürüm Notları</h4>
 			<span class="text-success">v1.00 (5 Kasım 2024):</span><br>
 			<ul>
 				<li>Haliyle ilk olarak site tasarlandı :D</li>

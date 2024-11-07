@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { TitleCasePipe } from '@angular/common';
 
-import { Observable } from 'rxjs';
-
-import { environment } from '../environments/environment';
+import { map, Observable } from 'rxjs';
 
 @Injectable()
 export class AppService {
@@ -11,19 +10,22 @@ export class AppService {
 
 	constructor(private http: HttpClient) {}
 
-	getMarkets(data: Record<string, any>): Observable<Market[]> {
-		const headers = {
-			'Authorization': `Bearer ${environment.monkedoToken}`,
-			'Content-Type': 'application/json',
-		};
-
-		const params = { data, userId: 'pazaryeribul.com' };
-
-		return this.http.post<Market[]>(`${this.monkedoURL}/automations/6727584dbcfa979526ef0bd8/run`, params, { headers });
+	getMarkets(): Observable<Market[]> {
+		return this.http.get<any[][]>('https://app.monkedo.com/webhook/ox830sl0syxqfyi0').pipe(
+			map((markets) => markets.map((market) => ({
+				name: this.toTitleCase(market[0]),
+				city: this.toTitleCase(market[1]),
+				state: this.toTitleCase(market[2]),
+				district: this.toTitleCase(market[3]),
+				address: this.toTitleCase(market[4]),
+				day: this.toTitleCase(market[5]),
+				point: market[6],
+			}))),
+		)
 	}
 
-	getFilters(): Observable<Filters> {
-		return this.http.get<Filters>('https://app.monkedo.com/webhook/f0lhcaj8adgwgyzz');
+	private toTitleCase(value: string): string {
+		return new TitleCasePipe().transform(value.toLocaleLowerCase('tr'));
 	}
 }
 
@@ -32,7 +34,7 @@ export type Market = {
 	address: string;
 	city: string;
 	state: string;
-	province: string;
+	district: string;
 	day: string;
 	point?: number;
 }
@@ -40,5 +42,5 @@ export type Market = {
 export type Filters = {
 	cities: string[];
 	states: string[];
-	provinces: string[];
+	districts: string[];
 }
