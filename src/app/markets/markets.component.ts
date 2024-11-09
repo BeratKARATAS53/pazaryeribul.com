@@ -18,7 +18,7 @@ export class MarketsComponent {
 	cities: string[] = [];
 	states: string[] = [];
 	districts: string[] = [];
-	days: string[] = [];
+	days = ['Pzt', 'Salı', 'Çrş', 'Prş', 'Cuma', 'Cmt', 'Pazar'];
 
 	cityStatesMap: { city: string, states: string[] }[] = [];
 	stateDistrictMap: { city: string, state: string, districts: string[] }[] = [];
@@ -47,13 +47,19 @@ export class MarketsComponent {
 	}
 
 	ngOnInit(): void {
-		//const filters = JSON.parse(localStorage.getItem('filters') || '{}');
-		//if (Object.keys(filters).length) this.filter = filters;
-
-		//const pagination = JSON.parse(localStorage.getItem('pagination') || '{}');
-		//if (Object.keys(pagination).length) this.pagination = pagination;
-
 		this.appService.getMarkets().subscribe((markets) => {
+			markets.forEach((market, _, array) => {
+				const moreThanOneDay = market.day.includes(',');
+				if (!moreThanOneDay) return;
+
+				const days = market.day.split(',').map((day) => this.appService.toTitleCase(day.trim()));
+				days.forEach((day) => {
+					array.push({ ...market, day });
+				});
+			});
+
+			markets = markets.filter((market) => !market.day.includes(','));
+
 			this.groupLocations(markets);
 
 			this.allMarkets = markets;
@@ -70,9 +76,6 @@ export class MarketsComponent {
 	}
 
 	async filterMarkets(): Promise<void> {
-		//localStorage.setItem('filters', JSON.stringify(this.filter));
-		//localStorage.setItem('pagination', JSON.stringify(this.pagination));
-
 		this.filteredMarkets = [...this.allMarkets].filter((market: Market) => {
 			if (
 				this.filter.city && market.city.toLocaleLowerCase('tr') !== this.filter.city.toLocaleLowerCase('tr')
@@ -85,7 +88,7 @@ export class MarketsComponent {
 					&& !market.state.toLocaleLowerCase('tr').includes(this.filter.search.toLocaleLowerCase('tr'))
 					&& !market.district.toLocaleLowerCase('tr').includes(this.filter.search.toLocaleLowerCase('tr'))
 				)
-				|| this.filter.day && market.day.toLocaleLowerCase('tr') !== this.filter.day.toLocaleLowerCase('tr')
+				|| this.filter.day && !market.day.toLocaleLowerCase('tr').includes(this.filter.day.toLocaleLowerCase('tr'))
 			) {
 				return false;
 			}
@@ -144,7 +147,6 @@ export class MarketsComponent {
 		this.cities = [...new Set(markets.map((market) => market.city))].sort();
 		this.states = [...new Set(markets.map((market) => market.state))].sort();
 		this.districts = [...new Set(markets.map((market) => market.district))].sort();
-		this.days = [...new Set(markets.map((market) => market.day))].sort();
 
 		this.cityStatesMap = this.cities.map((city) => ({
 			city,

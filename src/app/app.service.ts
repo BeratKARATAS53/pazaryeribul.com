@@ -24,7 +24,7 @@ export class AppService {
 		)
 	}
 
-	private toTitleCase(value: string): string {
+	toTitleCase(value: string): string {
 		return new TitleCasePipe().transform(value.toLocaleLowerCase('tr'));
 	}
 }
