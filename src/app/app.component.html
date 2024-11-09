@@ -1,6 +1,9 @@
 <div class="content" appTheme>
 	<div class="header">
-		<h2>pazaryeribul.com</h2>
+		<div class="logo">
+			<img [src]="'assets/logo-' + activeTheme + '.png'" alt="logo" width="50">
+			<h1>pazaryeribul</h1>
+		</div>
 		<div class="navs">
 			<a class="clickable" href="javascript:void(0)" (click)="openModal('infoModal')">Hakkında</a>
 			<select class="theme" name="theme" [(ngModel)]="activeTheme" (ngModelChange)="toggle()">
@@ -21,7 +24,7 @@
 	</div>
 </div>
 
-<dialog id="infoModal" class="modal">
+<dialog id="infoModal" class="modal w-550px">
 	<div class="modal-content">
 		<div class="header">
 			<h2 class="title">Hakkında</h2>
@@ -49,7 +52,7 @@
 			</ul>
 			<hr>
 			<h4>Sürüm Notları</h4>
-			<span class="text-success">v1.00 (5 Kasım 2024):</span><br>
+			<span class="text-success">v1.00 (9 Kasım 2024):</span><br>
 			<ul>
 				<li>Haliyle ilk olarak site tasarlandı ve geliştirildi 😊</li>
 			</ul>

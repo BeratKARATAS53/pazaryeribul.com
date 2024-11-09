@@ -1,0 +1,7 @@
+User-agent: *
+
+# Allow crawling of all other pages
+Allow: /
+
+# Sitemap to help search engines find your pages
+Sitemap: https://pazaryeribul.com/sitemap.xml
